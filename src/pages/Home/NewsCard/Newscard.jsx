@@ -51,7 +51,7 @@ const Newscard = ({ news }) => {
           <span className="pe-2">Rating:</span>
           <Rating
             readonly
-            initialRating={rating.number}
+            initialRating={rating?.number}
             emptySymbol={<FaRegStar></FaRegStar>}
             fullSymbol={<FaStar className="text-warning"></FaStar>}
             fractions={2}

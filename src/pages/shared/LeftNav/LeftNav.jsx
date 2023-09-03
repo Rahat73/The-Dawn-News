@@ -3,6 +3,7 @@ import "./LeftNav.css";
 import { useEffect, useState } from "react";
 import { ListGroup } from "react-bootstrap";
 import ActiveLink from "../../../components/ActiveLink/ActiveLink";
+import EditorsInsight from "../../News/EditorsInsight/EditorsInsight";
 
 const LeftNav = () => {
   const [categories, setCategories] = useState([]);
@@ -30,6 +31,9 @@ const LeftNav = () => {
             </ActiveLink>
           ))}
         </ListGroup>
+      </div>
+      <div className="editors-insight rounded-1 shadow">
+        <EditorsInsight props={"main"}></EditorsInsight>
       </div>
     </>
   );
