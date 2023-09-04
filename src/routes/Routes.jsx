@@ -7,6 +7,8 @@ import News from "../pages/News/News/News";
 import Login from "../pages/Login/Login/Login";
 import LoginLayout from "../layouts/LoginLayout";
 import Register from "../pages/Login/Register/Register";
+import PrivateRoutes from "./PrivateRoutes";
+import Terms from "../pages/shared/Terms/Terms";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,10 @@ const router = createBrowserRouter([
         path: "/register",
         element: <Register></Register>,
       },
+      {
+        path: "/terms",
+        element: <Terms></Terms>,
+      },
     ],
   },
   {
@@ -35,7 +41,9 @@ const router = createBrowserRouter([
         path: ":id",
         element: <Category></Category>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/categories/${params.id}`),
+          fetch(
+            `https://the-dawn-news-server.vercel.app/categories/${params.id}`
+          ),
       },
     ],
   },
@@ -45,9 +53,13 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/news/:id",
-        element: <News></News>,
+        element: (
+          <PrivateRoutes>
+            <News></News>
+          </PrivateRoutes>
+        ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/news/${params.id}`),
+          fetch(`https://the-dawn-news-server.vercel.app/news/${params.id}`),
       },
     ],
   },

@@ -7,7 +7,13 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 
 const NavigationBar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+      .then()
+      .catch((error) => console.log(error));
+  };
   return (
     <Navbar
       bg="dark"
@@ -22,7 +28,7 @@ const NavigationBar = () => {
           <Nav className="mx-auto align-items-center ">
             <Link
               className="text-decoration-none text-secondary-emphasis"
-              to="/"
+              to="/categories/0"
             >
               Home
             </Link>
@@ -36,7 +42,7 @@ const NavigationBar = () => {
               </Nav.Link>
             )}
             {user ? (
-              <Link to={"/logout"}>
+              <Link onClick={handleLogOut} to={"/login"}>
                 <button type="button" className="btn btn-secondary rounded-0">
                   <span className="fw-bold px-3">Log Out</span>
                 </button>

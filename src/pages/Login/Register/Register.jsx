@@ -1,13 +1,41 @@
 // import React from "react";
+import { useContext, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const Register = () => {
+  const { createUser } = useContext(AuthContext);
+  const [isAccepted, setIsAccepted] = useState(false);
+
+  const handleIsAccepted = (event) => {
+    setIsAccepted(event.target.checked);
+  };
+
+  const handleRegister = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const photo = form.photo.value;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    createUser(email, password)
+      .then((userCredential) => {
+        const createdUser = userCredential.user;
+        // console.log(createdUser);
+        form.reset();
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+
   return (
     <Container className="w-25 mx-auto py-5 vh-100">
       <h3>Please Register</h3>
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form onSubmit={handleRegister}>
+        <Form.Group className="mb-3" controlId="formBasicName">
           <Form.Label>Name</Form.Label>
           <Form.Control
             type="text"
@@ -16,7 +44,7 @@ const Register = () => {
             required
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3" controlId="formBasicPhoto">
           <Form.Label>Photo URL</Form.Label>
           <Form.Control
             type="text"
@@ -47,12 +75,17 @@ const Register = () => {
 
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
           <Form.Check
+            onClick={handleIsAccepted}
             type="checkbox"
             name="accept"
-            label="Accept Terms and Conditions"
+            label={
+              <span>
+                Accept <Link to={"/terms"}>Terms and Conditions</Link>
+              </span>
+            }
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" disabled={!isAccepted}>
           Register
         </Button>
         <br />
