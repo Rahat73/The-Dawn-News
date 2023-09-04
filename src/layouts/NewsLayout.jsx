@@ -4,8 +4,13 @@ import { Col, Container, Row } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
 import RightNav from "../pages/shared/RightNav/RightNav";
 import Footer from "../pages/shared/Footer/Footer";
+import { useEffect } from "react";
 
 const NewsLayout = () => {
+  useEffect(() => {
+    // Scroll to the top of the page when the pathname changes
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div>
       <Header></Header>

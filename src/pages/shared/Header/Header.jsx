@@ -2,7 +2,7 @@
 import moment from "moment/moment";
 import logo from "../../../assets/TDN-logo.png";
 import "./Header.css";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Marquee from "react-fast-marquee";
 
 const Header = () => {
@@ -21,31 +21,6 @@ const Header = () => {
           </Marquee>
         </Container>
       </div>
-
-      <Navbar
-        bg="dark"
-        data-bs-theme="dark"
-        collapseOnSelect
-        expand="lg"
-        className="bg-body-tertiary fw-bold"
-      >
-        <Container>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="mx-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#about">About</Nav.Link>
-              <Nav.Link href="#career">Career</Nav.Link>
-            </Nav>
-            <Nav>
-              <Nav.Link href="#profile">Profile</Nav.Link>
-              <button type="button" className="btn btn-secondary rounded-0">
-                <span className="fw-bold px-3">Login</span>
-              </button>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
     </>
   );
 };
