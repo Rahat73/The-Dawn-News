@@ -1,6 +1,6 @@
 ### Site Link:
 
-https://the-dawn-news-52826.web.com
+https://the-dawn-news-52826.firebaseapp.com
 
 # React + Vite
 

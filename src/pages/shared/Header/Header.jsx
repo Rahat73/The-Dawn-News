@@ -4,8 +4,24 @@ import logo from "../../../assets/TDN-logo.png";
 import "./Header.css";
 import { Container } from "react-bootstrap";
 import Marquee from "react-fast-marquee";
+import { useEffect, useState } from "react";
 
 const Header = () => {
+  const [news, setNews] = useState([]);
+  const [fetched, isFetched] = useState(false);
+
+  useEffect(() => {
+    fetch("https://the-dawn-news-server.vercel.app/news")
+      .then((res) => res.json())
+      .then((data) => setNews(data))
+      .then(isFetched(true));
+  }, []);
+
+  let trending;
+  if (fetched) {
+    trending = news.filter((n) => n.others_info.is_trending == true);
+  }
+
   return (
     <>
       <div className="text-center tdn-logo pb-3">
@@ -16,8 +32,11 @@ const Header = () => {
             <span className="fw-bold px-3">Latest</span>
           </button>
           <Marquee pauseOnHover={true} speed={100}>
-            I can be a React component, multiple React components, or just some
-            text.
+            {trending?.map((t) => (
+              <span key={t._id} className="pe-5">
+                - {t.title} -
+              </span>
+            ))}
           </Marquee>
         </Container>
       </div>
