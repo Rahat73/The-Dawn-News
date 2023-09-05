@@ -11,13 +11,27 @@ import {
   FaInstagram,
 } from "react-icons/fa6";
 import QZone from "../QZone/QZone";
+import { useContext } from "react";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const RightNav = () => {
+  const { googleSignIn } = useContext(AuthContext);
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((userCredential) => {
+        const loggedUser = userCredential.user;
+        console.log(loggedUser);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
   return (
     <div>
       <div className="login-with py-3 shadow rounded-1">
         <h4 className="w-75 mx-auto">Login with</h4>
         <Button
+          onClick={handleGoogleSignIn}
           className="my-2 px-4 d-flex align-items-center rounded-0 w-75 mx-auto"
           variant="outline-primary"
         >

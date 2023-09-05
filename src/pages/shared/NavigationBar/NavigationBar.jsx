@@ -1,7 +1,13 @@
 // import React from 'react';
 
 import { useContext } from "react";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import {
+  Container,
+  Nav,
+  Navbar,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap";
 import { FaCircleUser } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
@@ -36,11 +42,25 @@ const NavigationBar = () => {
             <Nav.Link href="#career">Career</Nav.Link>
           </Nav>
           <Nav className="align-items-center">
-            {user && (
-              <Nav.Link href="#profile">
-                <FaCircleUser size={"2em"}></FaCircleUser>
-              </Nav.Link>
-            )}
+            {user &&
+              (user.photoURL ? (
+                <Nav.Link href="#profile">
+                  <OverlayTrigger
+                    placement={`left`}
+                    overlay={
+                      <Tooltip>
+                        <strong>{user.displayName}</strong>.
+                      </Tooltip>
+                    }
+                  >
+                    <img src={user.photoURL} alt="" style={{ width: "2em" }} />
+                  </OverlayTrigger>
+                </Nav.Link>
+              ) : (
+                <Nav.Link href="#profile">
+                  <FaCircleUser size={"2em"}></FaCircleUser>
+                </Nav.Link>
+              ))}
             {user ? (
               <Link onClick={handleLogOut} to={"/login"}>
                 <button type="button" className="btn btn-secondary rounded-0">
